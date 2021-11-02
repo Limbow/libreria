@@ -1,0 +1,159 @@
+html{
+    background-color: #efefef;
+}
+body{
+    margin: 0;
+}
+
+header{
+    font-family: Verdana, Geneva, Tahoma, sans-serif, sans-serif;
+    font-size: 18px;
+    margin-top: 0 ;
+    background-color: rgb(93, 128, 161);
+    color: aliceblue;
+    height: 150px;
+    text-align: center;
+}
+
+header button{
+    background-color:rgb(93, 128, 161) ;
+    border: 0;
+    color:#fff;
+    transition: box-shadow 0.4s ease;
+    height: 40px;
+    border-radius: 4px;
+}
+
+header button:hover{
+    box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.6) ;
+}
+
+button{
+    font-family: Verdana, Geneva, Tahoma, sans-serif, sans-serif;
+    font-size: 15px;
+    user-select: none;
+    cursor: pointer;
+}
+
+#title{
+    margin-top: 0px ;
+    text-decoration: underline;
+    user-select: none;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 10px;
+}
+
+.signup{
+    margin-right: 10px;
+}
+
+.navBar{
+    background-color: rgb(93, 128, 161);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 10px;
+}
+
+.navBar button{
+    background-color: rgb(93, 128, 161);
+    border: 0;
+    color:#fff;
+    height: 40px;
+}
+
+.navBar button:hover{
+    color:#ccc;
+}
+
+#img1 img{
+    height: 250px;
+}
+
+#img1{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: justify;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgb(201, 224, 217);
+}
+
+#img1 img{
+    margin-right: 20px;
+}
+
+#img1 p{
+    width: 470px;
+}
+
+#img2 img{
+    height: 200px;
+}
+
+#img2{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: justify;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgb(201, 224, 217);
+}
+
+#img2 img{
+    margin-left: 20px;
+}
+
+#img2 p{
+    width: 470px;
+}
+
+img{
+    border-radius: 100px;
+}
+
+footer{
+    font-family: Verdana, Geneva, Tahoma, sans-serif, sans-serif;
+    font-size: 18px;
+    margin-top: 100px ;
+    background-color: rgb(93, 128, 161);
+    color: aliceblue;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+a:visited{
+    color: #fff;
+}
+
+a:link{
+    color: #fff;
+}
+
+a:hover{
+    color: rgb(51, 62, 83);
+}
+
+footer a{
+    transition: color 0.4s ease;
+}
+
+
+
+#text1 {
+
+}

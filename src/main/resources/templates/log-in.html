@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesion | Libreria Joaquincho</title>
+    <link rel="stylesheet" href="/css/login.css" type="text/css"/>
+</head>
+<body>
+    
+    <header class="header">
+        <h1 id="title">Libreria Online</h1>
+        <h3 id="title2">Inicio de sesion</h3>
+        <button id="goIndex" onclick="location.href='/'">Volver al inicio</button>
+    </header><br><br>
+
+    <section>
+        <form class="form-area" action="/succes" method="post" >
+            <div>
+                <label for="name">Correo electronico</label><br>
+                <input type="email" name="username" id="username" maxlength="24" placeholder="nickname">    
+            </div>
+            <div>
+                <label for="password">Contraseña</label><br>
+                <input type="password" name="password" id="password" placeholder="password">    
+            </div>
+            <button type="submit">Ingresar</button>
+            <a href="/signup">or sign up</a>
+        </form>
+        <label th:if="${error != null}" th:text="${error}" style=" color: red"></label>
+    </section>
+
+    <footer class="footer">
+
+        <a href="#title">Subir</a>
+        <a href="mailto:joacovas@hotmail.com">Contactanos</a>
+        <label id="copyrigth">@Copyrigth 2021</label>
+    </footer>
+</body>
+</html>

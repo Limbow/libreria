@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Autores | Libreria Joaquincho</title>
+        <link rel="stylesheet" href="/css/objetList.css" type="text/css"/>
+        <link rel="stylesheet" href="/css/books.css" type="text/css"/>
+    </head>
+    <body>
+        <header class="header">
+            <h1 id="title">Libreria Online</h1>
+            <button id="goIndex" onclick="location.href = '/'">Volver al inicio</button>
+        </header><br>
+        <div class="buttonConteiner">
+            <button class="addButton">Agregar editorial</button>
+        </div>
+        <section class="content">
+            <table class="form-control" name="autores">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                </tr>
+                <tr th:each="editorial : ${editoriales}">
+                    <td th:text="${editorial.id}"></td>
+                    <td th:text="${editorial.nombre}"></td>
+                </tr>
+            </table>
+        </section>
+
+
+        <footer class="footer">
+            <a href="#title">Subir</a>
+            <a href="mailto:joacovas@hotmail.com">Contactanos</a>
+            <label id="copyrigth">@Copyrigth 2021</label>
+        </footer>
+    </body>
+</html>

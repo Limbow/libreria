@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Busqueda | Libreria Joaquincho</title>
+        <link rel="stylesheet" href="/css/objetList.css" type="text/css"/>
+        <link rel="stylesheet" href="/css/books.css" type="text/css"/>
+    </head>
+    <body>
+        <header class="header">
+            <h1 id="title">Libreria Online</h1>
+            <button id="goIndex" onclick="location.href = '/'">Volver al inicio</button>
+        </header><br>
+        
+        <section class="content">
+            <table class="form-control" name="idBooks">
+                <tr>
+                    <th>ISBN</th>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>Editorial</th>
+                    <th>Ejemplares total</th>
+                    <th>Ejemplares prestados</th>
+                    <th>Ejemplares restantes</th>
+                    <th>Fecha de publicacion</th>
+                </tr>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.ISBN}"></td>
+                    <td th:text="${book.titulo}"></td>
+                    <td th:text="${book.autor.nombre}"></td>
+                    <td th:text="${book.editorial.nombre}"></td>
+                    <td th:text="${book.ejemplares}"></td>
+                    <td th:text="${book.prestados}"></td>
+                    <td th:text="${book.restantes}"></td>
+                    <td th:text="${book.fechaPublicacion}"></td>
+                </tr>
+            </table>
+        </section>
+
+
+        <footer class="footer">
+            <a href="#title">Subir</a>
+            <a href="mailto:joacovas@hotmail.com">Contactanos</a>
+            <label id="copyrigth">@Copyrigth 2021</label>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Libreria Joaquincho | Alquila tus libros gratis!</title>
+        <link rel="stylesheet" href="/css/index.css" type="text/css"/>
+    </head>
+    <body>
+
+        <header class="header">
+            <h1 id="title">Libreria Online</h1>
+            <div class="buttons">
+                <button class="login" th:if="${session.sessionUsuario == null}" onclick="location.href = '/log-in'" >Iniciar Sesion</button>
+                <button class="signup" th:if="${session.sessionUsuario == null}" onclick="location.href = '/signup'">Registrarse</button> 
+                <button id="logout" th:if="${session.sessionUsuario != null}" onclick="location.href='/logout'">Cerrar sesion</button>
+                <button class="signup" th:if="${session.sessionUsuario != null}" onclick="location.href='/account'">Mi Cuenta</button>
+                
+            </div>
+        </header>
+
+        <section class="navBar">
+            <button class="books" onclick="location.href = '/books'">Libros</button>
+            <button class="authors" onclick="location.href = '/autores'">Autores</button>
+            <button class="editorial" onclick="location.href = '/editoriales'">Editoriales</Button>
+            <form class="form-area" action="/search" method="get" >
+                <button type="submit" class="searchButton" >Buscar</button>
+                <input type="text" name="search" id="search">
+                </from>
+
+                </section><br><br>
+
+                <section class="content">
+                    <div id="img1">
+                        <img src="/img/libreria.png" alt="libreria">
+                        <p id="text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar neque laoreet suspendisse interdum consectetur. Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam. Massa tempor nec feugiat nisl. A arcu cursus vitae congue mauris rhoncus aenean vel. Felis donec et odio pellentesque diam volutpat commodo sed egestas. Sed risus pretium quam vulputate dignissim suspendisse in est ante. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis. Aenean sed adipiscing diam donec adipiscing tristique risus nec. At ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum. Mi in nulla posuere sollicitudin aliquam ultrices.</p>
+                    </div>
+                    <br><br>
+                    <div id="img2">
+                        <p id="text2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar neque laoreet suspendisse interdum consectetur. Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam. Massa tempor nec feugiat nisl. A arcu cursus vitae congue mauris rhoncus aenean vel. Felis donec et odio pellentesque diam volutpat commodo sed egestas. Sed risus pretium quam vulputate dignissim suspendisse in est ante. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis. Aenean sed adipiscing diam donec adipiscing tristique risus nec. At ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum. Mi in nulla posuere sollicitudin aliquam ultrices.</p>
+                        <img src="/img/img2.png" alt="imagen 2">
+                    </div>
+                </section>
+
+                <footer class="footer">
+                    <a href="mailto:joacovas@hotmail.com">Contactanos</a>
+                    <a href="#title">Subir</a>
+
+                    <label id="copyrigth">@Copyrigth 2021</label>
+                </footer>
+                </body>
+                </html>

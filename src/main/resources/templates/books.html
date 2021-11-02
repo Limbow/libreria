@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Libros | Libreria Joaquincho</title>
+        <link rel="stylesheet" href="/css/objetList.css" type="text/css" />
+        <link rel="stylesheet" href="/css/books.css" type="text/css" />
+    </head>
+
+    <body>
+        <header class="header">
+            <h1 id="title">Libreria Online</h1>
+            <button id="goIndex" onclick="location.href = '/'">Volver al inicio</button>
+        </header><br>
+        <input type="checkbox" id="btn-modal">
+        <label for="btn-modal" class="lbl-modal">Agregar libro</label>
+        <form class="prestarL" action="/prestarLibro" method="POST">
+            <select th:if="${session.sessionUsuario != null}" name="libro" id="libro">
+                <option th:each="libro : ${libros}" th:value="${libro.ISBN}" th:text="${libro.titulo}"></option>
+            </select>
+            <button th:if="${session.sessionUsuario != null}" >Tomar prestado</button>
+            <label th:if="${error != null}" th:text="${error}" style=" color: red"></label>
+        </form>
+        <div class="modal">
+            <div class="contenedor">
+                <h1 align="center">Ingrese los datos del libro</h1>
+                <form class="form-area" action="/books" method="POST">
+                    <div>
+                        <label for="isbn">ISBN</label>
+                        <input type="number" name="isbn" id="isbn">
+                    </div>
+                    <div>
+                        <label for="title">Titulo</label>
+                        <input type="text" name="title" id="title">
+                    </div>
+                    <div>
+                        <label for="autor">Autor</label>
+                        <select name="autor" id="autor">
+                            <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="editorial">Editorial</label>
+                        <select name="editorial" id="editorial">
+                            <option th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="ejemplares">Ejemplares</label>
+                        <input type="number" name="ejemplares" id="ejemplares">
+                    </div>
+                    <div>
+                        <label for="fecha">Fecha de publicacion</label>
+                        <input type="date" name="fecha" id="fecha">
+                    </div>
+                    <div class="botones">
+                        <button type="submit" id="add">Agregar</button>
+                    </div>
+                </form>
+
+                <label for="btn-modal" id="lbl-cerrar">Cerrar</label>
+            </div>
+        </div>
+        <section class="content">
+            <table class="form-control" name="idBooks">
+                <tr>
+                    <th>ISBN</th>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>Editorial</th>
+                    <th>Ejemplares total</th>
+                    <th>Ejemplares prestados</th>
+                    <th>Ejemplares restantes</th>
+                    <th>Fecha de publicacion</th>
+                </tr>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.ISBN}"></td>
+                    <td th:text="${book.titulo}"></td>
+                    <td th:text="${book.autor.nombre}"></td>
+                    <td th:text="${book.editorial.nombre}"></td>
+                    <td th:text="${book.ejemplares}"></td>
+                    <td th:text="${book.prestados}"></td>
+                    <td th:text="${book.restantes}"></td>
+                    <td th:text="${book.fechaPublicacion}"></td>
+                </tr>
+            </table>
+        </section>
+
+
+        <footer class="footer">
+            <a href="#title">Subir</a>
+            <a href="mailto:joacovas@hotmail.com">Contactanos</a>
+            <label id="copyrigth">@Copyrigth 2021</label>
+        </footer>
+    </body>
+
+</html>
