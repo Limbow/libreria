@@ -42,7 +42,7 @@ public class PortalControlador {
     private LibroServicio libroServicio;
     @Autowired
     private AutorServicio autorServicio;
-    
+
     @GetMapping("/")
     public String index(ModelMap model) {
         return "index.html";
@@ -53,13 +53,13 @@ public class PortalControlador {
     public String user(ModelMap model) {
         return "user.html";
     }
-    
+
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
     @GetMapping("/account")
-    public String account(){
+    public String account() {
         return "account.html";
     }
-    
+
     @GetMapping("/log-in")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
         if (error != null) {
@@ -88,7 +88,7 @@ public class PortalControlador {
         model.put("autores", autores);
 
         model.put("books", libros);
-        
+
         model.put("libros", libros);
 
         return "books.html";
@@ -112,14 +112,26 @@ public class PortalControlador {
         return "editoriales.html";
     }
 
-    @GetMapping("/search")
-    public String search() {
+    @PostMapping("/search")
+    public String search(ModelMap model, @RequestParam String text) {
+
+        List<Libro> libros = libroRepositorio.findAll();
+
+        List<Autor> autores = autorRepositorio.findAll();
+
+        List<Editorial> editoriales = ediRepositorio.findAll();
+
+        model.put("editoriales", editoriales);
+
+        model.put("autores", autores);
+
+        model.put("books", libros);
+
         return "search.html";
     }
 
     @PostMapping("/books")
-    public String cargarlibro(ModelMap modelo, Integer isbn, String title, Integer autor, Integer editorial, Integer ejemplares, @DateTimeFormat(pattern="yyyy-MM-dd") Date fecha) {
-	
+    public String cargarlibro(ModelMap modelo, Integer isbn, String title, Integer autor, Integer editorial, Integer ejemplares, @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha) {
 
         try {
             libroServicio.registrarLibro(isbn, title, ejemplares, fecha, autor, editorial);
@@ -136,7 +148,7 @@ public class PortalControlador {
     }
 
     @PostMapping("/signup")
-    public String registrar(ModelMap modelo,MultipartFile archivo, @RequestParam String name, @RequestParam String password, @RequestParam String password2, @RequestParam String email) {
+    public String registrar(ModelMap modelo, MultipartFile archivo, @RequestParam String name, @RequestParam String password, @RequestParam String password2, @RequestParam String email) {
 
         try {
             usuarioService.registrarUsuario(archivo, name, email, password, password2);
@@ -153,20 +165,19 @@ public class PortalControlador {
         modelo.put("desc", "Tu usuario fue registrado de manera satisfactioria");
         return "succes.html";
     }
-    
+
     @PostMapping("/autores")
-    public String agregarAutor(String nombre, HttpSession session, ModelMap model ){
-        
-        try{
+    public String agregarAutor(String nombre, HttpSession session, ModelMap model) {
+
+        try {
             autorServicio.registrarAutor(nombre);
-        }catch(ErrorServicio e){
+        } catch (ErrorServicio e) {
             model.put("error", e.getMessage());
             return "autores.html";
         }
-        
+
         model.put("titulo", "Autor agregado correctamente");
         return "succes.html";
     }
-    
-    
+
 }
