@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Flia Vasquez
  */
 @Controller
-
+@RequestMapping("/usuario")
 public class UsuarioController {
 
     @Autowired
@@ -39,7 +39,7 @@ public class UsuarioController {
     private LibroRepositorio libroRepositorio;
 
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
-    @GetMapping("/usuario/editar-perfil")
+    @GetMapping("/editar-perfil")
     public String editarPerfil(@RequestParam Integer id, ModelMap model, HttpSession session) {
 
         Usuario login = (Usuario) session.getAttribute("sessionUsuario");
@@ -59,8 +59,8 @@ public class UsuarioController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
-    @PostMapping("/usuario/actualizar-perfil")
-    public String actualizarPerfil(ModelMap model, HttpSession session, MultipartFile archivo, @RequestParam Integer id, String name, String password1, String password2, String email) {
+    @PostMapping("/actualizar-perfil")
+    public String actualizarPerfil(ModelMap model, HttpSession session, MultipartFile profimg, @RequestParam Integer id, String name, String password1, String password2, String email) {
 
         Usuario usuario = null;
         try {
@@ -69,7 +69,7 @@ public class UsuarioController {
                 return "redirect:/";
             }
             usuario = usuarioRepositorio.buscarPorId(id);
-            usuarioServicio.modificar(archivo, id, name, email, password2, password2);
+            usuarioServicio.modificar(profimg, id, name, email, password2, password2);
             session.setAttribute("sessionUsuario", usuario);
             return "redirect:/account";
         } catch (ErrorServicio e) {

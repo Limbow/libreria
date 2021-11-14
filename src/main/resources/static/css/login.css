@@ -34,6 +34,18 @@ header button:hover{
     box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.6) ;
 }
 
+#loginsection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#fotousuario{
+    height: 250px;
+    width: auto;
+    border-radius: 350px;
+}
+
 button{
     font-family: Verdana, Geneva, Tahoma, sans-serif, sans-serif;
     font-size: 15px;
@@ -81,7 +93,6 @@ button{
 .form-area a:hover{
     color: white;
 }
-
 
 input{
     height: 30px;

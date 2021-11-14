@@ -25,17 +25,13 @@ public class FotoServicio {
                 foto.setMime(archivo.getContentType());
                 foto.setNombre(archivo.getName());
                 foto.setContenido(archivo.getBytes());
-                System.out.println("EL TRY FUNCIONO BIEN");
                 
                 return fR.save(foto);
-                
             } catch (IOException e) {
-                System.out.println("ERROR EN EL TRY");
                 System.out.println(e.getMessage());
                 return null;
             }
         }else{
-            System.out.println("ARCHIVO NULL");
             return null;
         }
     }

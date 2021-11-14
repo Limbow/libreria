@@ -13,9 +13,11 @@
             <h1 id="title">Libreria Online</h1>
             <button id="goIndex" onclick="location.href = '/'">Volver al inicio</button>
         </header><br>
-        
-        <section class="content">
-            <table class="form-control" id="idBooks" th:if="${books != null">
+
+        <h1 align="center" th:if="${resultado}">No hay resultados</h1>
+        <div th:if="${not #lists.isEmpty(books)}">
+            <h4 align="center">Libros</h4>
+            <table class="form-control" id="idBooks">
                 <tr>
                     <th>ISBN</th>
                     <th>Titulo</th>
@@ -37,7 +39,38 @@
                     <td th:text="${book.fechaPublicacion}"></td>
                 </tr>
             </table>
-        </section>
+        </div>
+        <br><br>
+
+        <div th:if="${not #lists.isEmpty(authors)}">
+            <h4 align="center">Autores</h4>
+            <table class="form-control" id="autores" >
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                </tr>
+                <tr th:each="autor : ${authors}">
+                    <td th:text="${autor.id}"></td>
+                    <td th:text="${autor.nombre}"></td>
+                </tr>
+            </table>
+        </div>
+        <br><br>
+
+        <div th:if="${not #lists.isEmpty(editoriales)}">
+            <h4 align="center">Editoriales</h4>
+            <table class="form-control" id="editoriales" >
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                </tr>
+                <tr th:each="editorial : ${editoriales}">
+                    <td th:text="${editorial.id}"></td>
+                    <td th:text="${editorial.nombre}"></td>
+                </tr>
+            </table>
+        </div>
+        <br><br>
 
 
         <footer class="footer">

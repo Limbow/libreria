@@ -17,8 +17,11 @@ and open the template in the editor.
         <div class="container">
             <a th:href = "@{/usuario/editar-perfil(id=__${session.sessionUsuario.id}__)}" class="btn btn-primary btn xl rounded-pill mt-5">Edita tu perfil</a><br><br>
             <button id="goIndex" onclick="location.href = '/'">Volver al inicio</button><br><br>
-            <a  th:href="@{/devolver-libro(id=__${session.sessionUsuario.id}__)}" class="btn btn-primary btn xl rounded-pill mt-5">Devolver libro</a>
+            <a  th:href="@{/devolver-libro(id=__${session.sessionUsuario.id}__)}" th:if="${session.sessionUsuario.libro != null}" class="btn btn-primary btn xl rounded-pill mt-5">Devolver libro</a>
+            
+            <img class="img-fluid rounderd-circle" th:src="${'/foto/usuario/' + session.sessionUsuario.id}" alt="userimg">
         </div>
     </body>
 </html>
+<!--th:if="${session.sessionUsuario.foto != null}"-->
 <!-- th:if="${session.sessionUsuario.libro != null}" -->

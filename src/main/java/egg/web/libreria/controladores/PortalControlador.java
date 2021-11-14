@@ -3,6 +3,7 @@ package egg.web.libreria.controladores;
 import egg.web.libreria.entidades.Autor;
 import egg.web.libreria.entidades.Editorial;
 import egg.web.libreria.entidades.Libro;
+import egg.web.libreria.entidades.Usuario;
 import egg.web.libreria.errors.ErrorServicio;
 import egg.web.libreria.repositorios.AutorRepositorio;
 import egg.web.libreria.repositorios.EditorialRepositorio;
@@ -56,7 +57,11 @@ public class PortalControlador {
 
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
     @GetMapping("/account")
-    public String account() {
+    public String account(ModelMap model, HttpSession session) {
+        Usuario usuario = (Usuario) session.getAttribute("sessionUsuario");
+        
+        model.addAttribute("perfil", usuario);
+        
         return "account.html";
     }
 
@@ -113,20 +118,28 @@ public class PortalControlador {
     }
 
     @PostMapping("/search")
-    public String search(ModelMap model, @RequestParam String text) {
+    public String search(ModelMap model, String text) {
 
-        List<Libro> libros = libroRepositorio.findAll();
+//        List<Libro> libros = libroRepositorio.buscarPorTitulo(text);
+//
+//        List<Autor> autores = autorRepositorio.buscarPorNombre(text);
+//
+//        List<Editorial> editoriales = ediRepositorio.buscarPorNombre(text);
+        List<Libro> libros = libroRepositorio.findByTituloContains(text);
+        List<Autor> autores = autorRepositorio.findByNombreContains(text);
+        List<Editorial> editoriales = ediRepositorio.findByNombreContains(text);
 
-        List<Autor> autores = autorRepositorio.findAll();
+        Boolean resultado = libros.isEmpty() && autores.isEmpty() && editoriales.isEmpty();
 
-        List<Editorial> editoriales = ediRepositorio.findAll();
+        model.put("resultado", resultado);
 
         model.put("editoriales", editoriales);
 
-        model.put("autores", autores);
+        model.put("authors", autores);
 
         model.put("books", libros);
 
+        //model.put("text",text);
         return "search.html";
     }
 
@@ -148,10 +161,10 @@ public class PortalControlador {
     }
 
     @PostMapping("/signup")
-    public String registrar(ModelMap modelo, MultipartFile archivo, @RequestParam String name, @RequestParam String password, @RequestParam String password2, @RequestParam String email) {
+    public String registrar(ModelMap modelo, MultipartFile profimg, @RequestParam String name, @RequestParam String password, @RequestParam String password2, @RequestParam String email) {
 
         try {
-            usuarioService.registrarUsuario(archivo, name, email, password, password2);
+            usuarioService.registrarUsuario(profimg, name, email, password, password2);
         } catch (ErrorServicio ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("name", name);

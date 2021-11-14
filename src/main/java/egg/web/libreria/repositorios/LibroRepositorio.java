@@ -18,13 +18,15 @@ public interface LibroRepositorio extends JpaRepository<Libro, Integer>{
     @Query("SELECT l FROM Libro l WHERE l.ISBN = :isbn")
     public Libro buscarPorISBN(@Param("isbn") Integer isbn);
     
-    @Query("SELECT l FROM Libro l WHERE l.titulo = '%:titulo%'")
-    public Libro buscarPorTitulo(@Param("titulo") String titulo);
+    @Query("SELECT l FROM Libro l WHERE l.titulo LIKE '%:titulo%'")
+    public ArrayList<Libro> buscarPorTitulo(@Param("titulo") String titulo);
     
     @Query("SELECT l FROM Libro l, Autor a WHERE l.autor.id = :idAutor")
     public ArrayList<Libro> buscarPorAutor(@Param("idAutor")Integer idAutor);
     
     @Query("SELECT l FROM Libro l, Editorial e WHERE l.editorial.id = :idEditorial")
     public ArrayList<Libro> buscarPorEditorial(@Param("idEditorial")Integer idEditorial);
+    
+    public ArrayList<Libro> findByTituloContains(String titulo);
     //Faltan los ABM
 }

@@ -1,59 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualizar datos | Libreria Joaquincho</title>
-    <link rel="stylesheet" href="/css/login.css" type="text/css"/>
-</head>
-<body>
-    
-    <header class="header">
-        <h1 id="title">Libreria Online</h1>
-        <h3 id="title2" th:text="${session.sessionUsuario.nombre}"></h3>
-        <button id="goIndex" onclick="location.href='/'">Volver al inicio</button>
-    </header><br><br>
-    
-    <section >
-        <form class="form-area" action="/usuario/actualizar-perfil" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" th:value="${perfil.id}"/>
-            
-            <div class="name">
-                <label for="name">Nombre de usuario</label><br>
-                <input type="text" name="name" id="name" th:value="${perfil.nombre}" />
-            </div>
-            <div class="password">
-                <label for="password">Contraseña</label><br>
-                <input type="password" name="password" id="password1" th:value="${password}"/>
-            </div>
-            <div class="password">
-                <label for="password">Ingrese nuevamente la contraseña</label><br>
-                <input type="password" name="password2" id="password2"/>
-            </div>
-            <div class="email">
-                <label for="email">Correo electronico</label><br>
-                <input type="email" name="email" id="email" th:value="${perfil.email}" />
-            </div>
-            <div class="profImg">
-                <label for="profimg">Foto de perfil</label><br>
-                <input type="file" name="profimg" id="profimg">
-            </div>
-            <label align="center">Libro prestado: 
-            <label th:if="${libro != null}" th:text="${libro.titulo + '. ISBN: ' + libro.ISBN }"></label><br><br>
-            <div class="buttons"> 
-                <button type="submit">Actualizar</button>
-                <button type="reset">Borrar</button>
-            </div>
-            <label th:if="${error != null}" th:text="${error}" style=" color: red"></label>
-        </form>
-    </section>
-    
-    <footer class="footer">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Actualizar datos | Libreria Joaquincho</title>
+        <link rel="stylesheet" href="/css/login.css" type="text/css"/>
+    </head>
+    <body>
 
-        <a href="#title">Subir</a>
-        <a href="mailto:joacovas@hotmail.com">Contactanos</a>
-        <label id="copyrigth">@Copyrigth 2021</label>
-    </footer>
-</body>
+        <header class="header">
+            <h1 id="title">Libreria Online</h1>
+            <h3 id="title2" th:text="${session.sessionUsuario.nombre}"></h3>
+            <button id="goIndex" onclick="location.href='/'">Volver al inicio</button>
+
+        </header><br><br>
+
+        <section id="loginsection">
+            <div>
+                <form class="form-area" action="/usuario/actualizar-perfil" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" th:value="${perfil.id}"/>
+
+                    <div class="name">
+                        <label for="name">Nombre de usuario</label><br>
+                        <input type="text" name="name" id="name" th:value="${perfil.nombre}" />
+                    </div>
+                    <div class="password">
+                        <label for="password">Contraseña</label><br>
+                        <input type="password" name="password" id="password1" th:value="${password}"/>
+                    </div>
+                    <div class="password">
+                        <label for="password">Ingrese nuevamente la contraseña</label><br>
+                        <input type="password" name="password2" id="password2"/>
+                    </div>
+                    <div class="email">
+                        <label for="email">Correo electronico</label><br>
+                        <input type="email" name="email" id="email" th:value="${perfil.email}" />
+                    </div>
+                    <div class="profImg">
+                        <label for="profimg">Foto de perfil</label><br>
+                        <input type="file" name="profimg" id="profimg">
+                    </div>
+                    <label align="center">Libro prestado: 
+                        <label th:if="${libro != null}" th:text="${libro.titulo + '. ISBN: ' + libro.ISBN }"></label><br><br>
+                        <div class="buttons"> 
+                            <button type="submit">Actualizar</button>
+                            <button type="reset">Borrar</button>
+                        </div>
+                        <label th:if="${error != null}" th:text="${error}" style=" color: red"></label>
+                </form>
+            </div>
+            <img id="fotousuario" th:if="${perfil.foto != null}" class="img-fluid rounderd-circle" th:src="${'/foto/usuario/' + perfil.id}" alt="userimg">
+        </section>
+
+        <footer class="footer">
+
+            <a href="#title">Subir</a>
+            <a href="mailto:joacovas@hotmail.com">Contactanos</a>
+            <label id="copyrigth">@Copyrigth 2021</label>
+        </footer>
+    </body>
 </html>
