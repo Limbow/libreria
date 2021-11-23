@@ -1,5 +1,10 @@
 package egg.web.libreria.controladores;
 
+import com.mercadopago.MercadoPago;
+import com.mercadopago.exceptions.MPConfException;
+import com.mercadopago.exceptions.MPException;
+import com.mercadopago.resources.Preference;
+import com.mercadopago.resources.datastructures.preference.Item;
 import egg.web.libreria.entidades.Autor;
 import egg.web.libreria.entidades.Editorial;
 import egg.web.libreria.entidades.Libro;
@@ -10,6 +15,7 @@ import egg.web.libreria.repositorios.EditorialRepositorio;
 import egg.web.libreria.repositorios.LibroRepositorio;
 import egg.web.libreria.servicios.AutorServicio;
 import egg.web.libreria.servicios.LibroServicio;
+import egg.web.libreria.servicios.PagoServicio;
 import egg.web.libreria.servicios.UsuarioServicio;
 import java.util.Date;
 import java.util.List;
@@ -46,6 +52,25 @@ public class PortalControlador {
 
     @GetMapping("/")
     public String index(ModelMap model) {
+        try {
+            MercadoPago.SDK.setAccessToken("APP_USR-5937986277032148-101923-5f7e275772736b2c39ac66ce485d6408-277723064");
+            // Crea un objeto de preferencia
+            Preference preference = new Preference();
+
+            // Crea un ítem en la preferencia
+            Item item = new Item();
+            item.setTitle("Prueba de pago 1")
+                    .setQuantity(1)
+                    .setUnitPrice((float) 50.00);
+            preference.appendItem(item);
+            preference.save();
+            model.put("preference", preference.getId());
+            model.addAttribute("item", item);
+        } catch (MPConfException ex) {
+            Logger.getLogger(PagoServicio.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MPException ex) {
+            Logger.getLogger(PortalControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return "index.html";
     }
 

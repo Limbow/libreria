@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Libreria Joaquincho | Alquila tus libros gratis!</title>
         <link rel="stylesheet" href="/css/index.css" type="text/css"/>
+        <script src="https://sdk.mercadopago.com/js/v2"></script>
     </head>
     <body>
 
@@ -16,7 +17,7 @@
                 <button class="signup" th:if="${session.sessionUsuario == null}" onclick="location.href = '/signup'">Registrarse</button> 
                 <button id="logout" th:if="${session.sessionUsuario != null}" onclick="location.href='/logout'">Cerrar sesion</button>
                 <button class="signup" th:if="${session.sessionUsuario != null}" onclick="location.href='/account'">Mi Cuenta</button>
-                
+
             </div>
         </header>
 
@@ -42,7 +43,12 @@
                         <img src="/img/img2.png" alt="imagen 2">
                     </div>
                 </section>
-
+                
+                <div class="cho-container">
+                </div>
+                <label th:text="${preference}" id="preference"></label>
+                <label th:text="${item.title}"></label>
+                <label th:text="${item.unitPrice}"></label>
                 <footer class="footer">
                     <a href="mailto:joacovas@hotmail.com">Contactanos</a>
                     <a href="#title">Subir</a>
@@ -50,4 +56,24 @@
                     <label id="copyrigth">@Copyrigth 2021</label>
                 </footer>
                 </body>
+                <script type="text/javascript">
+                    // Agrega credenciales de SDK
+                    const mp = new MercadoPago('APP_USR-a9662542-6b53-4850-b2bb-e9d33310ced3', {
+                    locale: 'es-AR'
+                    });
+                    
+                    const preference = document.getElementById('preference').textContent;
+
+
+                    // Inicializa el checkout
+                    mp.checkout({
+                    preference: {
+                    id: preference
+                    },
+                    render: {
+                    container: '.cho-container', // Indica el nombre de la clase donde se mostrará el botón de pago
+                    label: 'Pagar', // Cambia el texto del botón de pago (opcional)
+                    }
+                    });
+                </script>
                 </html>
